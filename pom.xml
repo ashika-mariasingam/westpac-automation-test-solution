@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nz.co.westpac.robot</groupId>
-  <artifactId>westpac-robot-tests</artifactId>
+  <groupId>nz.co.westpac.automation-suite</groupId>
+  <artifactId>westpac-automation-tests</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>westpac-robot-tests</name>
+  <name>westpac-automation-tests</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -19,23 +19,43 @@
   </properties>
 
   <dependencies>
+    <!-- Cucumber dependencies start here -->
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>1.2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-core -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>1.2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>2.53.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>1.2.4</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-testng -->
     <dependency>
-      <groupId>org.robotframework</groupId>
-      <artifactId>robotframework</artifactId>
-      <version>3.2.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.markusbernhardt</groupId>
-      <artifactId>robotframework-selenium2library-java</artifactId>
-      <version>1.4.0.8</version>
-      <scope>test</scope>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-testng</artifactId>
+      <version>1.2.4</version>
     </dependency>
   </dependencies>
 
@@ -46,18 +66,6 @@
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.robotframework</groupId>
-          <artifactId>robotframework-maven-plugin</artifactId>
-          <version>1.4.7</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>run</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
