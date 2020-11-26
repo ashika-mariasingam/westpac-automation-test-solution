@@ -10,7 +10,7 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features/KiwiSaverRetirementCalculator.feature",
-        glue = "src/test/java/stepdefenition"
+        glue = "nz.co.westpac.stepdefs"
         )
 public class Run_KiwiSaverRetirementCalculatorTest {
 
