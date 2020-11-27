@@ -16,26 +16,27 @@ import nz.co.westpac.controllers.NavigationController;
 public class KiwiSaverRetirementCalculator
 {
 
-   private final NavigationController navigationController = new  NavigationController();
-   private final KiwiSaverRetirementCalculatorController kiwiSaverRetirementCalculatorController = new KiwiSaverRetirementCalculatorController();
+     private final NavigationController navigationController = new  NavigationController();
+    // private final KiwiSaverRetirementCalculatorController kiwiSaverRetirementCalculatorController = new KiwiSaverRetirementCalculatorController();
 
-    @Given("^Open browser \"([^\"]*)\"$")
-    public void open_browser(String browser)  {
+     @Given("^Open URL$")
+     public void open_browser()  {
+         navigationController.OpenURL();
+     }
 
-     navigationController.OpenBrowser(browser);    }
+     @And("^Navigate to the KiwiSaver Retirement Calculator page$")
+     public void navigate_to_the_KiwiSaver_Retirement_Calculator_page() {
+         navigationController.NavigateToKiwiSaverRetirementCalculator();
+     }
 
-    @And("^Navigate to the KiwiSaver Retirement Calculator page$")
-    public void navigate_to_the_KiwiSaver_Retirement_Calculator_page() {
+     @When("^I click on the information icon beside \"([^\"]*)\"$")
+     public void i_click_on_the_information_icon_beside_Current_Age(String fieldName)  {
+          navigationController.ClickOnInformationIcon(fieldName);
+     }
 
-     navigationController.NavigateToKiwiSaverRetirementCalculator();    }
+     @Then("^Message is displayed$")
+     public void message_is_displayed() {
 
-    @When("^I click on the information icon beside Current Age$")
-    public void i_click_on_the_information_icon_beside_Current_Age(String fieldName)  {
-     kiwiSaverRetirementCalculatorController.ClickOnInformationIcon(fieldName);    }
-
-    @Then("^Message is displayed$")
-    public void message_is_displayed() {
-
-    }
+     }
 
 }
