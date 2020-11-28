@@ -7,10 +7,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class WebElementReader {
-    private static Logger log = LoggerFactory.getLogger(WebElementReader.class);
+/**
+ * Helper Class for  common operations.
+ * Author: Ashika Mariasingam
+ */
+public final class SeleniumHelper {
+    private static Logger log = LoggerFactory.getLogger(SeleniumHelper.class);
 
-    private WebElementReader(){
+    private SeleniumHelper(){
     }
 
     public static WebElement getWebElement(final WebDriver driver, final String xpath) {
@@ -27,4 +31,6 @@ public final class WebElementReader {
             log.error("Encountered error {} while taking screenshot", e.getMessage(), e);
         }
     }
+
+
 }

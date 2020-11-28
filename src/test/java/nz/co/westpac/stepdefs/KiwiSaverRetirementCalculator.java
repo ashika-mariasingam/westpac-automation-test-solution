@@ -7,12 +7,9 @@ import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
 import cucumber.api.java.Before;
 import cucumber.api.java.After;
-import cucumber.api.Scenario;
 import nz.co.westpac.assertions.KiwiSaverRetirementCalculatorAssertion;
 import nz.co.westpac.controllers.KiwiSaverRetirementCalculatorController;
-import nz.co.westpac.helpers.WebElementReader;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import nz.co.westpac.helpers.SeleniumHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,9 +34,9 @@ public class KiwiSaverRetirementCalculator {
     @After
     public void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
-            WebElementReader.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} failed.");
+            SeleniumHelper.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} failed.");
         } else {
-            WebElementReader.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} passed.");
+            SeleniumHelper.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} passed.");
         }
         kiwiSaverRetirementCalculatorController.getWebDriver().close();
         kiwiSaverRetirementCalculatorController.getWebDriver().quit();
@@ -49,22 +46,22 @@ public class KiwiSaverRetirementCalculator {
     //########################################### SCENARIO 1 ###########################################
     //##################################################################################################
 
-    @Given("^User open browser and navigate to URL$")
+    @Given("^User opens browser and navigates to Website$")
     public void user_open_browser_and_navigate_to_URL() {
         kiwiSaverRetirementCalculatorController.openURL();
     }
 
-    @Then("^Navigate to the KiwiSaver Retirement Calculator page$")
+    @And("^User navigates to the KiwiSaver Retirement Calculator page$")
     public void navigate_to_the_KiwiSaver_Retirement_Calculator_page() {
         kiwiSaverRetirementCalculatorController.navigateToKiwiSaverRetirementCalculator();
     }
 
-    @When("^I click on the information icon beside \"([^\"]*)\"$")
+    @When("^User clicks on the information icon besides \"([^\"]*)\"$")
     public void i_click_on_the_information_icon_beside_Current_Age(String fieldName) {
         kiwiSaverRetirementCalculatorController.clickOnInformationIcon(fieldName);
     }
 
-    @Then("^Message is displayed$")
+    @Then("^Informative message is displayed$")
     public void message_is_displayed() {
         kiwiSaverRetirementCalculatorAssertion.assertCurrentAgeInfoMessage(kiwiSaverRetirementCalculatorController.getCurrentAgeInfoMessageDisplayed());
     }
@@ -75,27 +72,27 @@ public class KiwiSaverRetirementCalculator {
     //##################################################################################################
 
 
-    @And("^User enter Current Age as (.*)$")
+    @And("^User enters Current Age as (.*)$")
     public void user_enter_Current_Age_as(String currentAge) {
         kiwiSaverRetirementCalculatorController.enterCurrentAge(currentAge);
     }
 
-    @And("^User choose Employment status \"([^\"]*)\"$")
+    @And("^User selects Employment status \"([^\"]*)\"$")
     public void user_choose_Employment_status(String employmentStatus) {
         kiwiSaverRetirementCalculatorController.chooseEmploymentStatus(employmentStatus);
     }
 
-    @And("^User enter Salary as (.*)$")
+    @And("^User enters Salary as (.*)$")
     public void user_enter_Salary_as(String salary) {
         kiwiSaverRetirementCalculatorController.enterSalary(salary);
     }
 
-    @And("^User choose KiwiSaver contribution as (.*)$")
+    @And("^User selects KiwiSaver contribution as (.*)$")
     public void user_choose_KiwiSaver_contribution_as(String kiwiSaverContribution) {
         kiwiSaverRetirementCalculatorController.chooseKiwiSaverContribution(kiwiSaverContribution);
     }
 
-    @And("^User choose Risk profile as \"([^\"]*)\"$")
+    @And("^User selects Risk profile as \"([^\"]*)\"$")
     public void user_choose_Risk_profile_as(String defensiveProfile) {
         kiwiSaverRetirementCalculatorController.chooseRiskProfile(defensiveProfile);
     }
@@ -115,12 +112,12 @@ public class KiwiSaverRetirementCalculator {
         kiwiSaverRetirementCalculatorController.entersVoluntaryContribution(voluntaryContribution, voluntaryContributionFrequency);
     }
 
-    @When("^User clicks the Complete form button$")
+    @When("^User clicks the Complete the form button$")
     public void user_clicks_the_Complete_form_button() {
         kiwiSaverRetirementCalculatorController.clickKiwiSaverSubmit();
     }
 
-    @Then("^The correct results are displayed as (.*)$")
+    @Then("^The result is displayed as (.*)$")
     public void the_correct_results_are_displayed(String expectedResult) {
         String actualResult = kiwiSaverRetirementCalculatorController.getResultValue();
         kiwiSaverRetirementCalculatorAssertion.assertResults(expectedResult,actualResult);

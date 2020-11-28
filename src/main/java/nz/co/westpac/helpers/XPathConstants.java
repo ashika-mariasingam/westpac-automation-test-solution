@@ -1,5 +1,9 @@
 package nz.co.westpac.helpers;
 
+/**
+ * Constant Class for XPaths.
+ * Author: Ashika Mariasingam
+ */
 public final class XPathConstants {
 
     private XPathConstants() {

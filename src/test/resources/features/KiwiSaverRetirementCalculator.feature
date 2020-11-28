@@ -1,28 +1,30 @@
 # Created by ashika-mariasingam at 25/11/2020
 Feature: KiwiSaver Retirement Calculator
 
-  Scenario: Check contents for KiwiSaver Retirement Calculator
-    Given User open browser and navigate to URL
-    Then  Navigate to the KiwiSaver Retirement Calculator page
-    When  I click on the information icon beside "Current Age"
-    Then  Message is displayed
+  @scenario1
+  Scenario: Check content for Current Age in KiwiSaver Retirement Calculator
+    Given User opens browser and navigates to Website
+    And   User navigates to the KiwiSaver Retirement Calculator page
+    When  User clicks on the information icon besides "Current Age"
+    Then  Informative message is displayed
 
+  @scenario2
   Scenario Outline: Verify the KiwiSaver Retirement Calculations
-    Given User open browser and navigate to URL
-    Then  Navigate to the KiwiSaver Retirement Calculator page
-    And   User enter Current Age as <Age>
-    And   User choose Employment status "<EmploymentStatus>"
+    Given User opens browser and navigates to Website
+    And   User navigates to the KiwiSaver Retirement Calculator page
+    And   User enters Current Age as <Age>
+    And   User selects Employment status "<EmploymentStatus>"
     And   User enters KiwiSaver balance as <KiwiSaverBalance>
-    And   User enter Salary as <Salary>
+    And   User enters Salary as <Salary>
     And   User enters Voluntary Contribution as <VoluntaryContribution> and <VoluntaryContributionFrequency>
-    And   User choose KiwiSaver contribution as <KiwiContribution>
-    And   User choose Risk profile as "<RiskProfile>"
+    And   User selects KiwiSaver contribution as <KiwiContribution>
+    And   User selects Risk profile as "<RiskProfile>"
     And   User enters Savings goals as <SavingGoals>
-    When  User clicks the Complete form button
-    Then  The correct results are displayed as <Results>
+    When  User clicks the Complete the form button
+    Then  The result is displayed as <Result>
 
     Examples:
-      | Age | EmploymentStatus | KiwiSaverBalance | Salary | VoluntaryContribution | VoluntaryContributionFrequency | KiwiContribution | RiskProfile  | SavingGoals | Results |
+      | Age | EmploymentStatus | KiwiSaverBalance | Salary | VoluntaryContribution | VoluntaryContributionFrequency | KiwiContribution | RiskProfile  | SavingGoals | Result |
       | 30  | Employed         |                  | 82000  |                       |                                | 4                | Defensive    | 0           | 436365  |
       | 45  | Self-employed    | 100000           |        | 90                    | Fortnightly                    |                  | Conservative | 290000      | 259581  |
       | 55  | Not employed     | 140000           |        | 10                    | Annually                       |                  | Balanced     | 200000      | 260734  |

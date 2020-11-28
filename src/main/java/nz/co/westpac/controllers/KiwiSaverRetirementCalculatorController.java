@@ -1,17 +1,15 @@
 package nz.co.westpac.controllers;
 
+import nz.co.westpac.exceptions.WestpacException;
+import nz.co.westpac.helpers.PropertyConstants;
+import nz.co.westpac.helpers.WebDriverFactory;
 import nz.co.westpac.views.KiwiSaverRetirementCalculatorView;
 import nz.co.westpac.views.NavigationView;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Controller Class for  KiwiSaverRetirementCalculator Step definition.
@@ -40,9 +38,11 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
     private static final String ANNUALLY = "Annually";
 
 
+    /**
+     * Default Constructor
+     */
     public KiwiSaverRetirementCalculatorController() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-        this.driver = new ChromeDriver();
+        this.driver = WebDriverFactory.createWebDriver();
         if (webDriverThreadLocal.get() == null) {
             this.webDriverThreadLocal.set(this.driver);
         }
@@ -50,11 +50,21 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
         this.kiwiSaverRetirementCalculatorView = new KiwiSaverRetirementCalculatorView(this.driver);
     }
 
+    /**
+     * Method to open url.
+     */
     public void openURL() {
-        this.driver.manage().window().maximize();
-        this.driver.get("http://www.westpac.co.nz/");
+        try {
+            this.driver.manage().window().maximize();
+            this.driver.get(properties.get(PropertyConstants.BASE_URL).toString());
+        } catch (Exception e) {
+            log.error("Encountered error {} while opening URL", e.getMessage(), e);
+        }
     }
 
+    /**
+     * Method to assist in navigating to the required pages.
+     */
     public void navigateToKiwiSaverRetirementCalculator() {
         WebElement kiwi = navigationView.getKiwiSaverMenuTab();
         Actions action = new Actions(driver);
@@ -63,6 +73,10 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
         navigationView.getKiwiSaverRetirementCalculatorLink().click();
     }
 
+    /**
+     * Method to assist in clicking the information icon.
+     * @param fieldName
+     */
     public void clickOnInformationIcon(String fieldName) {
         if (StringUtils.equals(fieldName, CURRENT_AGE)) {
             this.driver.switchTo().frame(navigationView.getKiwiSaverRetirementCalculatorIframe());
@@ -71,6 +85,10 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCurrentAgeInfoMessageDisplayed() {
         return navigationView.getInformationIconElement().getText();
     }

@@ -10,6 +10,11 @@ public class WestpacException {
 
     private String errorMessage;
 
+    public WestpacException(String errorCode, String errorMessage) {
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+    }
+
     public String getErrorCode() {
         return errorCode;
     }
