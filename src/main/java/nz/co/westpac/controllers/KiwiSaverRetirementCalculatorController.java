@@ -1,44 +1,78 @@
 package nz.co.westpac.controllers;
 
 import nz.co.westpac.views.KiwiSaverRetirementCalculatorView;
+import nz.co.westpac.views.NavigationView;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Controller Class for  KiwiSaverRetirementCalculator Step definition.
+ * Author: Ashika Mariasingam
+ */
 public class KiwiSaverRetirementCalculatorController extends BaseController {
 
+    private final KiwiSaverRetirementCalculatorView kiwiSaverRetirementCalculatorView;
+    private final NavigationView navigationView;
+    private static final String CURRENT_AGE = "Current Age";
+    private static final String EMPLOYED = "Employed";
+    private static final String SELF_EMPLOYED = "Self-employed";
+    private static final String NOT_EMPLOYED = "Not employed";
+    private static final String INT_3 = "3";
+    private static final String INT_4 = "4";
+    private static final String INT_6 = "6";
+    private static final String INT_8 = "8";
+    private static final String INT_10 = "10";
+    private static final String DEFENSIVE = "Defensive";
+    private static final String CONSERVATIVE = "Conservative";
+    private static final String BALANCED = "Balanced";
+    private static final String GROWTH = "Growth";
+    private static final String WEEKLY = "Weekly";
+    private static final String FORTNIGHTLY = "Fortnightly";
+    private static final String MONTHLY = "Monthly";
+    private static final String ANNUALLY = "Annually";
 
-    public static final String EMPLOYED = "Employed";
-    public static final String SELF_EMPLOYED = "Self-employed";
-    public static final String NOT_EMPLOYED = "Not employed";
-    public static final String INT_3 = "3";
-    public static final String INT_4 = "4";
-    public static final String INT_6 = "6";
-    public static final String INT_8 = "8";
-    public static final String INT_10 = "10";
-    public static final String DEFENSIVE = "Defensive";
-    public static final String CONSERVATIVE = "Conservative";
-    public static final String BALANCED = "Balanced";
-    public static final String GROWTH = "Growth";
-    public static final String WEEKLY = "Weekly";
-    public static final String FORTNIGHTLY = "Fortnightly";
-    public static final String MONTHLY = "Monthly";
-    public static final String ANNUALLY = "Annually";
-    public static final String CURRENT_AGE_EXPECTED_INFO_MESSAGE = "This calculator has an age limit of 64 years old as you need to be under the age of 65 to join KiwiSaver.";
-    public static final String RESULT_EXAMPLE_1 = "436365";
-    public KiwiSaverRetirementCalculatorView kiwiSaverRetirementCalculatorView = new KiwiSaverRetirementCalculatorView();
-    public static final String CURRENT_AGE = "Current Age";
 
     public KiwiSaverRetirementCalculatorController() {
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
+        this.driver = new ChromeDriver();
+        if (webDriverThreadLocal.get() == null) {
+            this.webDriverThreadLocal.set(this.driver);
+        }
+        this.navigationView = new NavigationView(this.driver);
+        this.kiwiSaverRetirementCalculatorView = new KiwiSaverRetirementCalculatorView(this.driver);
+    }
+
+    public void openURL() {
+        this.driver.manage().window().maximize();
+        this.driver.get("http://www.westpac.co.nz/");
+    }
+
+    public void navigateToKiwiSaverRetirementCalculator() {
+        WebElement kiwi = navigationView.getKiwiSaverMenuTab();
+        Actions action = new Actions(driver);
+        action.moveToElement(kiwi).perform();
+        navigationView.getKiwiSaverLink().click();
+        navigationView.getKiwiSaverRetirementCalculatorLink().click();
     }
 
     public void clickOnInformationIcon(String fieldName) {
         if (StringUtils.equals(fieldName, CURRENT_AGE)) {
-            this.driver.switchTo().frame(kiwiSaverRetirementCalculatorView.getKiwiSaverRetirementCalculatorIframe());
-            WebElement currentAgeButton = kiwiSaverRetirementCalculatorView.getKiwiSaverRetirementCalculatorInformationIconCurrentAge();
+            this.driver.switchTo().frame(navigationView.getKiwiSaverRetirementCalculatorIframe());
+            WebElement currentAgeButton = navigationView.getKiwiSaverRetirementCalculatorInformationIconCurrentAge();
             currentAgeButton.click();
         }
+    }
+
+    public String getCurrentAgeInfoMessageDisplayed() {
+        return navigationView.getInformationIconElement().getText();
     }
 
     public void enterCurrentAge(String currentAge) {
@@ -47,9 +81,9 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
     }
 
     public void chooseEmploymentStatus(String employmentStatus) {
-        //driver.switchTo().frame(getKiwiSaverRetirementCalculatorIframe());
         WebElement kiwiSaverEmploymentStatusElement = kiwiSaverRetirementCalculatorView.getKiwiSaverEmploymentStatus();
         kiwiSaverEmploymentStatusElement.click();
+        this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         switch (employmentStatus) {
             case EMPLOYED:
@@ -145,60 +179,43 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
 
         if (StringUtils.isNotBlank(voluntaryContribution) && StringUtils.isNotBlank(voluntaryContributionFrequency)) {
             WebElement voluntaryContributionElement = kiwiSaverRetirementCalculatorView.getVoluntaryContribution();
-            WebElement voluntaryContributionFrequencyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionFrequency();
-            WebElement voluntaryContributionWeeklyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionWeekly();
-            WebElement voluntaryContributionFortnightlyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionFortnightly();
-            WebElement voluntaryContributionMonthlyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionMonthly();
-            WebElement voluntaryContributionAnnuallyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionAnnually();
             voluntaryContributionElement.sendKeys(voluntaryContribution);
+            WebElement voluntaryContributionFrequencyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionFrequency();
             voluntaryContributionFrequencyElement.click();
+            this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             switch (voluntaryContributionFrequency) {
                 case WEEKLY:
+                    log.info("### Selected WEEKLY Frequency!");
+                    WebElement voluntaryContributionWeeklyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionWeekly();
                     voluntaryContributionWeeklyElement.click();
                     break;
                 case FORTNIGHTLY:
+                    log.info("### Selected FORTNIGHTLY Frequency!");
+                    WebElement voluntaryContributionFortnightlyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionFortnightly();
                     voluntaryContributionFortnightlyElement.click();
                     break;
                 case MONTHLY:
+                    log.info("### Selected MONTHLY Frequency!");
+                    WebElement voluntaryContributionMonthlyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionMonthly();
                     voluntaryContributionMonthlyElement.click();
                     break;
                 case ANNUALLY:
+                    log.info("### Selected ANNUALLY Frequency!");
+                    WebElement voluntaryContributionAnnuallyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionAnnually();
                     voluntaryContributionAnnuallyElement.click();
                     break;
                 default:
+                    log.warn("### Wasn't able to select any Frequency!");
                     break;
-
             }
 
         }
 
     }
 
-    public void assertMessageDisplayed() {
-        String expectedMessage = CURRENT_AGE_EXPECTED_INFO_MESSAGE;
-        String actualMessage = kiwiSaverRetirementCalculatorView.getInformationIconElement().getText();
-        assertEquals(expectedMessage,actualMessage);
-        assertEquals("Displayed message - ",actualMessage,expectedMessage);
-
+    public String getResultValue() {
+        return kiwiSaverRetirementCalculatorView.getResultsDivElement().getText();
     }
-
-    public String getResultValue(){
-        //Add implementation
-        return null;
-    }
-
-    public void assertResults(String results){
-        if(StringUtils.isNotBlank(results)){
-            String actualResult;
-            switch (results){
-                case RESULT_EXAMPLE_1:
-                    actualResult = getResultValue();
-                    assertEquals("Displayed results - "+actualResult+" should be 436365",actualResult,RESULT_EXAMPLE_1);
-            }
-        }
-
-    }
-
 
 
 }

@@ -1,118 +1,107 @@
 package nz.co.westpac.views;
 
+import nz.co.westpac.helpers.WebElementReader;
+import nz.co.westpac.helpers.XPathConstants;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
+/**
+ * View class for KiwiSaverRetirementCalculator Step definition.
+ * Author: Ashika Mariasingam
+ */
 public class KiwiSaverRetirementCalculatorView extends BaseView {
 
-    public WebElement getKiwiSaverRetirementCalculatorIframe() {
-        //WebDriverWait wait = new WebDriverWait(this.driver, 20);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[1]")));
-        this.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        return this.driver.findElement(By.xpath("//iframe[1]"));
-    }
-
-    public WebElement getKiwiSaverRetirementCalculatorInformationIconCurrentAge() {
-        WebDriverWait wait = new WebDriverWait(this.driver, 20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@help-id='CurrentAge']/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button")));
-        return this.driver.findElement(By.xpath("//div[@help-id='CurrentAge']/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/button"));
+    public KiwiSaverRetirementCalculatorView(final WebDriver driver) {
+        super(driver);
     }
 
     public WebElement getKiwiSaverCurrentAgeTextField() {
-        return this.driver.findElement(By.xpath("//div[@label='Current age']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_CURRENT_AGE_TEXT_FIELD);
     }
 
     public WebElement getKiwiSaverSalary() {
-        return this.driver.findElement(By.xpath("//div[@label='Salary or wages per year (before tax)']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_SALARY_ELEMENT);
     }
 
     public WebElement getKiwiSaverEmploymentStatus() {
-        WebDriverWait wait = new WebDriverWait(this.driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")));
-        return this.driver.findElement(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_EMPLOYMENT_STATUS_ELEMENT);
     }
 
     public WebElement getKiwiSaverEmploymentStatusEmployed() {
-        WebDriverWait wait = new WebDriverWait(this.driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[1]/div[1]")));
-        return this.driver.findElement(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[1]/div[1]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_EMPLOYMENT_STATUS_EMPLOYED);
     }
 
     public WebElement getKiwiSaverEmploymentStatusSelfEmployed() {
-        WebDriverWait wait = new WebDriverWait(this.driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[2]/div[1]")));
-        return this.driver.findElement(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[2]/div[1]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_EMPLOYMENT_STATUS_SELF_EMPLOYED);
     }
 
     public WebElement getKiwiSaverEmploymentStatusNotEmployed() {
-        WebDriverWait wait = new WebDriverWait(this.driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[3]/div[1]")));
-        return this.driver.findElement(By.xpath("//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[3]/div[1]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_EMPLOYMENT_STATUS_NOT_EMPLOYED);
     }
 
     public WebElement getKiwiSaverMemberContributionFour() {
-        return this.driver.findElement(By.xpath("//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/label/span/input[@id='radio-option-04F']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_FOUR);
     }
 
     public WebElement getKiwiSaverRiskProfileDefensive() {
-        return this.driver.findElement(By.xpath("//div[@label='Risk profile']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/label/span/input[@id='radio-option-013']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_RISK_PROFILE);
     }
 
     public WebElement getKiwiSaverRetirementCalculatorSubmit() {
-        return this.driver.findElement(By.xpath("//div[@class='widget-body']/div[1]/div[2]/button[@class='btn-results-reveal']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_KIWI_SAVER_SUBMIT);
     }
 
     public WebElement getKiwiSaverBalance() {
-        return this.driver.findElement(By.xpath("//div[@help-id='KiwiSaverBalance']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_BALANCE);
     }
 
     public WebElement getVoluntaryContribution() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION);
     }
 
     public WebElement getVoluntaryContributionFrequency() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION_FREQUENCY);
     }
 
-
     public WebElement getVoluntaryContributionWeekly() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/ul/li[2]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION_WEEKLY);
     }
 
     public WebElement getVoluntaryContributionFortnightly() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/ul/li[3]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION_FORTNIGHTLY);
     }
 
     public WebElement getVoluntaryContributionMonthly() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/ul/li[4]"));
+        return this.driver.findElement(By.xpath(XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION_MONTHLY));
     }
 
     public WebElement getVoluntaryContributionAnnually() {
-        return this.driver.findElement(By.xpath("//div[@help-id='VoluntaryContributions']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/ul/li[5]"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_VOLUNTARY_CONTRIBUTION_ANNUALLY);
     }
 
     public WebElement getRiskProfileConservative() {
-        return this.driver.findElement(By.xpath("//div[@help-id='RiskProfile']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/label/span[1]/input[@id='radio-option-016']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_RISK_PROFILE_CONSERVATIVE);
     }
 
     public WebElement getRiskProfileBalanced() {
-        return this.driver.findElement(By.xpath("//div[@help-id='RiskProfile']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/label/span[1]/input[@id='radio-option-019']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_RISK_PROFILE_BALANCED);
     }
 
     public WebElement getRiskProfileGrowth() {
-        return this.driver.findElement(By.xpath("//div[@help-id='RiskProfile']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/label/span[1]/input[@id='radio-option-01C']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_RISK_PROFILE_GROWTH);
     }
 
     public WebElement getSavingsGoal() {
-        return this.driver.findElement(By.xpath("//div[@help-id='SavingsGoal']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']"));
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_SAVING_GOAL);
     }
 
-    public WebElement getInformationIconElement() {
-        return this.driver.findElement(By.xpath("//div[@class ='message-row ng-scope']/div[1]/p[1]"));
+    public WebElement getKiwiSaverRetirementCalculatorIframe() {
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_IFRAME);
+    }
+
+    public WebElement getResultsDivElement() {
+        return WebElementReader.getWebElement(this.driver, XPathConstants.XPATH_RESULTS_DIV);
     }
 
 

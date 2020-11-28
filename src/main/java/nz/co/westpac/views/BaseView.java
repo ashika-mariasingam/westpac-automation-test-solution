@@ -1,14 +1,19 @@
 package nz.co.westpac.views;
 
-import nz.co.westpac.controllers.BaseController;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Step definition class for  NavigateToKiwiSaverRetirementCalculator Step definition.
+ * Author: Ashika Mariasingam
+ */
 public class BaseView {
 
     protected final WebDriver driver;
-    private final BaseController baseController = new BaseController();
+    protected Logger log = LoggerFactory.getLogger(BaseView.class);
 
-    public BaseView() {
-        this.driver = baseController.getWebDriver();
+    public BaseView(final WebDriver driver) {
+        this.driver = driver;
     }
 }

@@ -1,11 +1,22 @@
 package nz.co.westpac.stepdefs;
 
+import cucumber.api.Scenario;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
 import cucumber.api.java.Before;
 import cucumber.api.java.After;
+import cucumber.api.Scenario;
+import nz.co.westpac.assertions.KiwiSaverRetirementCalculatorAssertion;
 import nz.co.westpac.controllers.KiwiSaverRetirementCalculatorController;
+import nz.co.westpac.helpers.WebElementReader;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Step definition class for  KiwiSaverRetirementCalculator
@@ -14,18 +25,39 @@ import nz.co.westpac.controllers.KiwiSaverRetirementCalculatorController;
 public class KiwiSaverRetirementCalculator {
 
     private final KiwiSaverRetirementCalculatorController kiwiSaverRetirementCalculatorController = new KiwiSaverRetirementCalculatorController();
+    public static Scenario scenario;
+    private Logger log = LoggerFactory.getLogger(KiwiSaverRetirementCalculator.class);
+    private KiwiSaverRetirementCalculatorAssertion kiwiSaverRetirementCalculatorAssertion;
 
     @Before
     public void setup() {
-
+        kiwiSaverRetirementCalculatorAssertion = new KiwiSaverRetirementCalculatorAssertion();
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            WebElementReader.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} failed.");
+        } else {
+            WebElementReader.takeScreenshot(kiwiSaverRetirementCalculatorController.getWebDriver(), scenario, "Scenario {} passed.");
+        }
         kiwiSaverRetirementCalculatorController.getWebDriver().close();
         kiwiSaverRetirementCalculatorController.getWebDriver().quit();
     }
 
+    //##################################################################################################
+    //########################################### SCENARIO 1 ###########################################
+    //##################################################################################################
+
+    @Given("^User open browser and navigate to URL$")
+    public void user_open_browser_and_navigate_to_URL() {
+        kiwiSaverRetirementCalculatorController.openURL();
+    }
+
+    @Then("^Navigate to the KiwiSaver Retirement Calculator page$")
+    public void navigate_to_the_KiwiSaver_Retirement_Calculator_page() {
+        kiwiSaverRetirementCalculatorController.navigateToKiwiSaverRetirementCalculator();
+    }
 
     @When("^I click on the information icon beside \"([^\"]*)\"$")
     public void i_click_on_the_information_icon_beside_Current_Age(String fieldName) {
@@ -34,11 +66,16 @@ public class KiwiSaverRetirementCalculator {
 
     @Then("^Message is displayed$")
     public void message_is_displayed() {
-        kiwiSaverRetirementCalculatorController.assertMessageDisplayed();
+        kiwiSaverRetirementCalculatorAssertion.assertCurrentAgeInfoMessage(kiwiSaverRetirementCalculatorController.getCurrentAgeInfoMessageDisplayed());
     }
 
 
-    @And("^User enter Current Age as (\\d+)$")
+    //##################################################################################################
+    //########################################### SCENARIO 2 ###########################################
+    //##################################################################################################
+
+
+    @And("^User enter Current Age as (.*)$")
     public void user_enter_Current_Age_as(String currentAge) {
         kiwiSaverRetirementCalculatorController.enterCurrentAge(currentAge);
     }
@@ -84,7 +121,8 @@ public class KiwiSaverRetirementCalculator {
     }
 
     @Then("^The correct results are displayed as (.*)$")
-    public void the_correct_results_are_displayed(String results) {
-        kiwiSaverRetirementCalculatorController.assertResults(results);
+    public void the_correct_results_are_displayed(String expectedResult) {
+        String actualResult = kiwiSaverRetirementCalculatorController.getResultValue();
+        kiwiSaverRetirementCalculatorAssertion.assertResults(expectedResult,actualResult);
     }
 }
