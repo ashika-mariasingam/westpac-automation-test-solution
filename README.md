@@ -27,13 +27,13 @@ These instructions will help you get the project up and running on your local ma
 
 ## Executing Tests from CLI
 
-####Syntax for executing tests:
+#### Syntax for executing tests:
 ```mvn test -Dbrowser=<<browser_name>> -Denv=<<environment_name>>```
-#####where
-#####allowed browser_name: 'chrome'(default) , 'edge', 'ie' & 'firefox'.
-#####allowed environment_name: 'dev'(default), 'test'.
+##### where
+##### allowed browser_name: 'chrome'(default) , 'edge', 'ie' & 'firefox'.
+##### allowed environment_name: 'dev'(default), 'test'.
 
-#####Examples:
+##### Examples:
 ```mvn test -Dbrowser=chrome -Denv=dev```
 ```mvn test -Dbrowser=chrome -Denv=test```
 
