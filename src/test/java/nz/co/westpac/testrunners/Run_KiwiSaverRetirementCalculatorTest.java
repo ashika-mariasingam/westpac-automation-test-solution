@@ -4,7 +4,10 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 import cucumber.api.CucumberOptions;
 
-
+/**
+ * Test Runner for all features.
+ * Author: Ashika Mariasingam
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features/KiwiSaverRetirementCalculator.feature",
@@ -15,5 +18,4 @@ import cucumber.api.CucumberOptions;
         monochrome = true
 )
 public class Run_KiwiSaverRetirementCalculatorTest {
-
 }

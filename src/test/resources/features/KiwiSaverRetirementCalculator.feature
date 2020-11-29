@@ -1,14 +1,14 @@
 # Created by ashika-mariasingam at 25/11/2020
 Feature: KiwiSaver Retirement Calculator
 
-  @scenario1
+  @scenario1 @dev @test
   Scenario: Check content for Current Age in KiwiSaver Retirement Calculator
     Given User opens browser and navigates to Website
     And   User navigates to the KiwiSaver Retirement Calculator page
     When  User clicks on the information icon besides "Current Age"
     Then  Informative message is displayed
 
-  @scenario2
+  @scenario2 @dev @test
   Scenario Outline: Verify the KiwiSaver Retirement Calculations
     Given User opens browser and navigates to Website
     And   User navigates to the KiwiSaver Retirement Calculator page

@@ -7,11 +7,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * View class for KiwiSaverRetirementCalculator Step definition.
+ * View class for Scenario 2.
+ * This class contains methods to locate web elements on the kiwi-saver retirement calculator iframe.
  * Author: Ashika Mariasingam
  */
 public class KiwiSaverRetirementCalculatorView extends BaseView {
 
+    /**
+     * Parameterized Constructor.
+     * @param driver
+     */
     public KiwiSaverRetirementCalculatorView(final WebDriver driver) {
         super(driver);
     }
@@ -40,8 +45,24 @@ public class KiwiSaverRetirementCalculatorView extends BaseView {
         return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_EMPLOYMENT_STATUS_NOT_EMPLOYED);
     }
 
+    public WebElement getKiwiSaverMemberContributionThree() {
+        return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_THREE);
+    }
+
     public WebElement getKiwiSaverMemberContributionFour() {
         return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_FOUR);
+    }
+
+    public WebElement getKiwiSaverMemberContributionSix() {
+        return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_SIX);
+    }
+
+    public WebElement getKiwiSaverMemberContributionEight() {
+        return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_EIGHT);
+    }
+
+    public WebElement getKiwiSaverMemberContributionTen() {
+        return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_MEMBER_CONTRIBUTION_TEN);
     }
 
     public WebElement getKiwiSaverRiskProfileDefensive() {
@@ -103,6 +124,4 @@ public class KiwiSaverRetirementCalculatorView extends BaseView {
     public WebElement getResultsDivElement() {
         return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_RESULTS_DIV);
     }
-
-
 }

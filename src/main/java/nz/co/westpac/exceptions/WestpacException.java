@@ -1,16 +1,16 @@
 package nz.co.westpac.exceptions;
 
 /**
- * Class for handling checked exceptions.
+ * Class for handling exceptions.
  * Author: Ashika Mariasingam
  */
-public class WestpacException {
+public class WestpacException extends Exception{
 
     private String errorCode;
 
     private String errorMessage;
 
-    public WestpacException(String errorCode, String errorMessage) {
+    public WestpacException(final String errorCode, final String errorMessage) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }

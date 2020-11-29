@@ -24,7 +24,8 @@ public class BaseController {
         try {
             this.webDriverThreadLocal = new ThreadLocal<>();
             this.properties = new Properties();
-            properties.load(getClass().getClassLoader().getResourceAsStream("configs/westpac.properties"));
+            String environment = System.getProperty("env", "dev");
+            properties.load(getClass().getClassLoader().getResourceAsStream("configs/westpac-"+environment+".properties"));
         } catch (Exception e) {
             log.error("Encountered error {} while initializing base controller", e.getMessage(), e);
         }

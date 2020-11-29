@@ -1,6 +1,5 @@
 package nz.co.westpac.controllers;
 
-import nz.co.westpac.exceptions.WestpacException;
 import nz.co.westpac.helpers.PropertyConstants;
 import nz.co.westpac.helpers.WebDriverFactory;
 import nz.co.westpac.views.KiwiSaverRetirementCalculatorView;
@@ -42,7 +41,7 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
      * Default Constructor
      */
     public KiwiSaverRetirementCalculatorController() {
-        this.driver = WebDriverFactory.createWebDriver();
+        this.driver = WebDriverFactory.createWebDriver(properties);
         if (webDriverThreadLocal.get() == null) {
             this.webDriverThreadLocal.set(this.driver);
         }
@@ -86,18 +85,26 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
     }
 
     /**
-     *
+     * Method to assist getting CurrentAge Info Message Displayed.
      * @return
      */
     public String getCurrentAgeInfoMessageDisplayed() {
         return navigationView.getInformationIconElement().getText();
     }
 
+    /**
+     * Method to assist entering current age in the text field.
+     * @param currentAge
+     */
     public void enterCurrentAge(String currentAge) {
         this.driver.switchTo().frame(kiwiSaverRetirementCalculatorView.getKiwiSaverRetirementCalculatorIframe());
         kiwiSaverRetirementCalculatorView.getKiwiSaverCurrentAgeTextField().sendKeys(currentAge);
     }
 
+    /**
+     * Method to assist in selecting an employment status from drop-down.
+     * @param employmentStatus
+     */
     public void chooseEmploymentStatus(String employmentStatus) {
         WebElement kiwiSaverEmploymentStatusElement = kiwiSaverRetirementCalculatorView.getKiwiSaverEmploymentStatus();
         kiwiSaverEmploymentStatusElement.click();
@@ -119,30 +126,44 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
             default:
                 break;
         }
-
     }
 
+    /**
+     * Method to assist in entering salary in the text-field.
+     * @param salary
+     */
     public void enterSalary(String salary) {
         if (StringUtils.isNotBlank(salary)) {
             kiwiSaverRetirementCalculatorView.getKiwiSaverSalary().sendKeys(salary);
         }
     }
 
+    /**
+     * Method to assist in selecting a kiwi-saver contribution from the radio button list.
+     * @param kiwiSaverContribution
+     */
     public void chooseKiwiSaverContribution(String kiwiSaverContribution) {
-
         if (StringUtils.isNotBlank(kiwiSaverContribution)) {
             switch (kiwiSaverContribution) {
                 case INT_3:
+                    WebElement kiwiSaverMemberContributionThreeElement = kiwiSaverRetirementCalculatorView.getKiwiSaverMemberContributionThree();
+                    kiwiSaverMemberContributionThreeElement.click();
                     break;
                 case INT_4:
                     WebElement kiwiSaverMemberContributionFourElement = kiwiSaverRetirementCalculatorView.getKiwiSaverMemberContributionFour();
                     kiwiSaverMemberContributionFourElement.click();
                     break;
                 case INT_6:
+                    WebElement kiwiSaverMemberContributionSixElement = kiwiSaverRetirementCalculatorView.getKiwiSaverMemberContributionSix();
+                    kiwiSaverMemberContributionSixElement.click();
                     break;
                 case INT_8:
+                    WebElement kiwiSaverMemberContributionEightElement = kiwiSaverRetirementCalculatorView.getKiwiSaverMemberContributionEight();
+                    kiwiSaverMemberContributionEightElement.click();
                     break;
                 case INT_10:
+                    WebElement kiwiSaverMemberContributionTenElement = kiwiSaverRetirementCalculatorView.getKiwiSaverMemberContributionTen();
+                    kiwiSaverMemberContributionTenElement.click();
                     break;
                 default:
                     break;
@@ -150,54 +171,29 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
         }
     }
 
-    public void chooseRiskProfile(String riskProfile) {
-        if (StringUtils.isNotBlank(riskProfile)) {
-            switch (riskProfile) {
-                case DEFENSIVE:
-                    WebElement defensiveRiskProfileElement = kiwiSaverRetirementCalculatorView.getKiwiSaverRiskProfileDefensive();
-                    defensiveRiskProfileElement.click();
-                    break;
-                case CONSERVATIVE:
-                    WebElement conservativeRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileConservative();
-                    conservativeRiskProfileElement.click();
-                    break;
-                case BALANCED:
-                    WebElement balancedRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileBalanced();
-                    balancedRiskProfileElement.click();
-                    break;
-                case GROWTH:
-                    WebElement growthRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileGrowth();
-                    growthRiskProfileElement.click();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    public void clickKiwiSaverSubmit() {
-        WebElement kiwiSaverRetirementSubmitElement = kiwiSaverRetirementCalculatorView.getKiwiSaverRetirementCalculatorSubmit();
-        kiwiSaverRetirementSubmitElement.click();
-    }
-
+    /**
+     * Method to assist in entering current kiwi-saver balance in the text-field.
+     * @param kiwiSaverBalance
+     */
     public void enterKiwiSaverBalance(String kiwiSaverBalance) {
         if (StringUtils.isNotBlank(kiwiSaverBalance)) {
             kiwiSaverRetirementCalculatorView.getKiwiSaverBalance().sendKeys(kiwiSaverBalance);
         }
     }
 
-    public void enterSavingGoals(String savingGoals) {
-        if (StringUtils.isNotBlank(savingGoals)) {
-            WebElement savingsTextElement = kiwiSaverRetirementCalculatorView.getSavingsGoal();
-            savingsTextElement.sendKeys(savingGoals);
-        }
-    }
-
-    public void entersVoluntaryContribution(String voluntaryContribution, String voluntaryContributionFrequency) {
-
+    /**
+     * Method to assist in entering voluntary contribution details
+     * @param voluntaryContribution
+     * @param voluntaryContributionFrequency
+     */
+    public void enterVoluntaryContribution(String voluntaryContribution, String voluntaryContributionFrequency) {
         if (StringUtils.isNotBlank(voluntaryContribution) && StringUtils.isNotBlank(voluntaryContributionFrequency)) {
+
+            // Enter voluntary contribution amount in text-field.
             WebElement voluntaryContributionElement = kiwiSaverRetirementCalculatorView.getVoluntaryContribution();
             voluntaryContributionElement.sendKeys(voluntaryContribution);
+
+            // Select payment frequency from drop-down.
             WebElement voluntaryContributionFrequencyElement = kiwiSaverRetirementCalculatorView.getVoluntaryContributionFrequency();
             voluntaryContributionFrequencyElement.click();
             this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -226,14 +222,62 @@ public class KiwiSaverRetirementCalculatorController extends BaseController {
                     log.warn("### Wasn't able to select any Frequency!");
                     break;
             }
-
         }
-
     }
 
+    /**
+     * Method to assist in selecting a risk profile from the radio button list.
+     * @param riskProfile
+     */
+    public void chooseRiskProfile(String riskProfile) {
+        if (StringUtils.isNotBlank(riskProfile)) {
+            switch (riskProfile) {
+                case DEFENSIVE:
+                    WebElement defensiveRiskProfileElement = kiwiSaverRetirementCalculatorView.getKiwiSaverRiskProfileDefensive();
+                    defensiveRiskProfileElement.click();
+                    break;
+                case CONSERVATIVE:
+                    WebElement conservativeRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileConservative();
+                    conservativeRiskProfileElement.click();
+                    break;
+                case BALANCED:
+                    WebElement balancedRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileBalanced();
+                    balancedRiskProfileElement.click();
+                    break;
+                case GROWTH:
+                    WebElement growthRiskProfileElement = kiwiSaverRetirementCalculatorView.getRiskProfileGrowth();
+                    growthRiskProfileElement.click();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Method to assist in entering savings goal in text-box.
+     * @param savingGoals
+     */
+    public void enterSavingGoals(String savingGoals) {
+        if (StringUtils.isNotBlank(savingGoals)) {
+            WebElement savingsTextElement = kiwiSaverRetirementCalculatorView.getSavingsGoal();
+            savingsTextElement.sendKeys(savingGoals);
+        }
+    }
+
+    /**
+     * Method to assist in clicking the kiwi-saver retirement calculation submit button.
+     */
+    public void clickKiwiSaverSubmit() {
+        WebElement kiwiSaverRetirementSubmitElement = kiwiSaverRetirementCalculatorView.getKiwiSaverRetirementCalculatorSubmit();
+        kiwiSaverRetirementSubmitElement.click();
+    }
+
+    /**
+     * Method to get the calculated projection.
+     * @return
+     */
     public String getResultValue() {
         return kiwiSaverRetirementCalculatorView.getResultsDivElement().getText();
     }
-
-
 }

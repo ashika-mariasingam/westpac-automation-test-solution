@@ -1,7 +1,7 @@
 package nz.co.westpac.helpers;
 
 /**
- * Constant Class for XPaths.
+ * Constant Class for accessing XPaths.
  * Author: Ashika Mariasingam
  */
 public final class XPathConstants {
@@ -17,7 +17,12 @@ public final class XPathConstants {
     public static final String XPATH_EMPLOYMENT_STATUS_EMPLOYED = "//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[2]/div[1]";
     public static final String XPATH_EMPLOYMENT_STATUS_SELF_EMPLOYED = "//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[3]/div[1]";
     public static final String XPATH_EMPLOYMENT_STATUS_NOT_EMPLOYED = "//div[@label='Employment status']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul/li[4]/div[1]";
+    public static final String XPATH_MEMBER_CONTRIBUTION_THREE = "//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/label/span/input[@id='radio-option-04C']";
     public static final String XPATH_MEMBER_CONTRIBUTION_FOUR = "//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/label/span/input[@id='radio-option-04F']";
+    public static final String XPATH_MEMBER_CONTRIBUTION_SIX = "//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/label/span/input[@id='radio-option-04I']";
+    public static final String XPATH_MEMBER_CONTRIBUTION_EIGHT = "//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/label/span/input[@id='radio-option-04L']";
+    public static final String XPATH_MEMBER_CONTRIBUTION_TEN = "//div[@label='KiwiSaver member contribution']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/label/span/input[@id='radio-option-04O']";
+
     public static final String XPATH_RISK_PROFILE = "//div[@label='Risk profile']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/label/span/input[@id='radio-option-013']";
     public static final String XPATH_KIWI_SAVER_SUBMIT = "//div[@class='widget-body']/div[1]/div[2]/button";
     public static final String XPATH_BALANCE = "//div[@help-id='KiwiSaverBalance']/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[@type='text']";

@@ -13,8 +13,6 @@ import nz.co.westpac.helpers.SeleniumHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Step definition class for  KiwiSaverRetirementCalculator
  * Author: Ashika Mariasingam
@@ -109,7 +107,7 @@ public class KiwiSaverRetirementCalculator {
 
     @And("^User enters Voluntary Contribution as (.*) and (.*)$")
     public void user_enters_Voluntary_Contribution_as(String voluntaryContribution, String voluntaryContributionFrequency) {
-        kiwiSaverRetirementCalculatorController.entersVoluntaryContribution(voluntaryContribution, voluntaryContributionFrequency);
+        kiwiSaverRetirementCalculatorController.enterVoluntaryContribution(voluntaryContribution, voluntaryContributionFrequency);
     }
 
     @When("^User clicks the Complete the form button$")

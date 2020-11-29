@@ -6,11 +6,16 @@ import org.openqa.selenium.WebElement;
 import nz.co.westpac.helpers.SeleniumHelper;
 
 /**
- * View class for  NavigateToKiwiSaverRetirementCalculator Step definition.
+ * View class for  Scenario 1.
+ * This class contains methods to locate web elements on the kiwi-saver retirement calculator iframe.
  * Author: Ashika Mariasingam
  */
 public class NavigationView extends BaseView {
 
+    /**
+     * Parameterized Constructor.
+     * @param driver
+     */
     public NavigationView(final WebDriver driver) {
         super(driver);
     }
@@ -38,5 +43,4 @@ public class NavigationView extends BaseView {
     public WebElement getInformationIconElement() {
         return SeleniumHelper.getWebElement(this.driver, XPathConstants.XPATH_INFORMATION_ICON);
     }
-
 }
